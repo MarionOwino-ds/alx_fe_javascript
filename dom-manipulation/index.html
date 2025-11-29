@@ -14,12 +14,13 @@
   <!-- Button to show random quote -->
   <button id="newQuote">Show New Quote</button>
 
-  <!-- Form to add a new quote -->
+  <!-- Export and Import JSON -->
   <div style="margin-top: 20px;">
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-    <button id="addQuote">Add Quote</button>
+    <button id="exportJson">Export Quotes as JSON</button>
+    <input type="file" id="importFile" accept=".json" />
   </div>
+
+  <!-- Add Quote form will be created dynamically by JS -->
 
   <!-- JavaScript -->
   <script src="script.js"></script>
