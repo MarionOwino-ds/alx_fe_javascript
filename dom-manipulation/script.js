@@ -146,6 +146,18 @@ async function fetchQuotesFromServer() {
   }
 }
 
+async function postQuotesToServer() {
+  try {
+    await fetch(SERVER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(quotes)
+    });
+  } catch (error) {
+    console.error("Error posting quotes to server:", error);
+  }
+}
+
 async function syncWithServer() {
   const serverQuotes = await fetchQuotesFromServer();
 
@@ -153,6 +165,8 @@ async function syncWithServer() {
     const exists = quotes.some(q => q.text === sq.text && q.category === sq.category);
     if (!exists) quotes.push(sq);
   });
+
+  await postQuotesToServer();
 
   saveQuotes();
   populateCategories();
