@@ -158,25 +158,31 @@ async function postQuotesToServer() {
   }
 }
 
-async function syncWithServer() {
+async function syncQuotes() {
   const serverQuotes = await fetchQuotesFromServer();
+  let newServerQuotes = 0;
 
   serverQuotes.forEach(sq => {
     const exists = quotes.some(q => q.text === sq.text && q.category === sq.category);
-    if (!exists) quotes.push(sq);
+    if (!exists) {
+      quotes.push(sq);
+      newServerQuotes++;
+    }
   });
+
+  if (newServerQuotes > 0) {
+    alert(`${newServerQuotes} new quote(s) fetched from server.`);
+  }
 
   await postQuotesToServer();
 
   saveQuotes();
   populateCategories();
   showRandomQuote();
-
-  if (serverQuotes.length > 0) alert("Quotes have been synced with the server!");
 }
 
 function manualSync() {
-  syncWithServer();
+  syncQuotes();
   alert("Manual sync completed!");
 }
 
@@ -196,5 +202,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("quoteDisplay").textContent = `"${quotes[lastIndex].text}" — (${quotes[lastIndex].category})`;
   }
 
-  setInterval(syncWithServer, 30000);
+  setInterval(syncQuotes, 30000);
 });
