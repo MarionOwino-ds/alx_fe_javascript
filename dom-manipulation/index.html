@@ -8,6 +8,12 @@
 <body>
   <h1>Dynamic Quote Generator</h1>
 
+  <!-- Category Filter -->
+  <label for="categoryFilter">Filter by Category:</label>
+  <select id="categoryFilter" onchange="filterQuotes()">
+    <option value="all">All Categories</option>
+  </select>
+
   <!-- Display quote -->
   <div id="quoteDisplay" style="margin-bottom: 20px; font-style: italic;"></div>
 
@@ -22,7 +28,6 @@
 
   <!-- Add Quote form will be created dynamically by JS -->
 
-  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
