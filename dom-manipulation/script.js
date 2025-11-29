@@ -170,15 +170,12 @@ async function syncQuotes() {
     }
   });
 
-  if (newServerQuotes > 0) {
-    alert(`${newServerQuotes} new quote(s) fetched from server.`);
-  }
-
   await postQuotesToServer();
-
   saveQuotes();
   populateCategories();
   showRandomQuote();
+
+  alert("Quotes synced with server!");
 }
 
 function manualSync() {
