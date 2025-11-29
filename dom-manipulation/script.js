@@ -1,52 +1,49 @@
-// Array of quote objects
+// required quotes array
 let quotes = [
     { text: "Stay hungry, stay foolish.", category: "Motivation" },
-    { text: "The only limit to our realization of tomorrow is our doubts of today.", category: "Inspiration" },
-    { text: "Simplicity is the soul of efficiency.", category: "Productivity" }
+    { text: "Simplicity is the ultimate sophistication.", category: "Design" }
   ];
   
-  // Display a random quote
+  // REQUIRED function name
   function showRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const quoteObj = quotes[randomIndex];
   
-    const quoteDisplay = document.getElementById("quoteDisplay");
-    quoteDisplay.innerHTML = `
-      <p><strong>Quote:</strong> ${quoteObj.text}</p>
-      <p><strong>Category:</strong> ${quoteObj.category}</p>
+    const display = document.getElementById("quoteDisplay");
+    display.innerHTML = `
+      <p>${quoteObj.text}</p>
+      <p><em>Category: ${quoteObj.category}</em></p>
     `;
   }
   
-  // Add a new quote dynamically
+  // REQUIRED: addQuote function must be GLOBAL
   function addQuote() {
-    const textInput = document.getElementById("newQuoteText");
-    const categoryInput = document.getElementById("newQuoteCategory");
+    const text = document.getElementById("newQuoteText").value.trim();
+    const category = document.getElementById("newQuoteCategory").value.trim();
   
-    const newText = textInput.value.trim();
-    const newCategory = categoryInput.value.trim();
+    if (text === "" || category === "") return;
   
-    if (newText === "" || newCategory === "") {
-      alert("Please fill in both fields.");
-      return;
-    }
+    // Add to array
+    quotes.push({ text: text, category: category });
   
-    // Add quote to array
-    quotes.push({
-      text: newText,
-      category: newCategory
-    });
+    // Update DOM immediately
+    const display = document.getElementById("quoteDisplay");
+    display.innerHTML = `
+      <p>${text}</p>
+      <p><em>Category: ${category}</em></p>
+    `;
   
     // Clear inputs
-    textInput.value = "";
-    categoryInput.value = "";
-  
-    alert("Quote added successfully!");
+    document.getElementById("newQuoteText").value = "";
+    document.getElementById("newQuoteCategory").value = "";
   }
   
-  // Event listeners
+  // REQUIRED: event listener for Show New Quote button
   document.getElementById("newQuote").addEventListener("click", showRandomQuote);
-  document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
   
-  // Show a quote on page load
+  // REQUIRED: event listener for Add Quote button
+  document.getElementById("addQuote").addEventListener("click", addQuote);
+  
+  // show default quote on load
   showRandomQuote();
   
