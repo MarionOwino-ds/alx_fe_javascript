@@ -4,8 +4,8 @@ let quotes = [
     { text: "Knowledge is power.", category: "Education" }
   ];
   
-  // REQUIRED FUNCTION 1
-  function showRandomQuote() {
+  // REQUIRED FUNCTION NAME
+  function displayRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const q = quotes[randomIndex];
   
@@ -13,7 +13,7 @@ let quotes = [
     display.textContent = `${q.text} — (${q.category})`;
   }
   
-  // REQUIRED FUNCTION 2
+  // REQUIRED addQuote FUNCTION
   function addQuote() {
     const textInput = document.getElementById("newQuoteText");
     const categoryInput = document.getElementById("newQuoteCategory");
@@ -25,13 +25,13 @@ let quotes = [
       return;
     }
   
-    // REQUIRED: logic to add a new quote to array
+    // Add new quote
     quotes.push({
       text: newText,
       category: newCategory
     });
   
-    // REQUIRED: update DOM immediately
+    // Update DOM
     const display = document.getElementById("quoteDisplay");
     display.textContent = `${newText} — (${newCategory})`;
   
@@ -40,12 +40,12 @@ let quotes = [
     categoryInput.value = "";
   }
   
-  // REQUIRED EVENT LISTENER 1
-  document.getElementById("newQuote").addEventListener("click", showRandomQuote);
+  // REQUIRED EVENT LISTENER
+  document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
   
-  // REQUIRED EVENT LISTENER 2
+  // Add Quote button listener
   document.getElementById("addQuote").addEventListener("click", addQuote);
   
-  // Initial load
-  showRandomQuote();
+  // Show default quote
+  displayRandomQuote();
   
