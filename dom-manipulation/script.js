@@ -1,49 +1,51 @@
-// required quotes array
+// Quotes array
 let quotes = [
     { text: "Stay hungry, stay foolish.", category: "Motivation" },
-    { text: "Simplicity is the ultimate sophistication.", category: "Design" }
+    { text: "Knowledge is power.", category: "Education" }
   ];
   
-  // REQUIRED function name
+  // REQUIRED FUNCTION 1
   function showRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
-    const quoteObj = quotes[randomIndex];
+    const q = quotes[randomIndex];
   
     const display = document.getElementById("quoteDisplay");
-    display.innerHTML = `
-      <p>${quoteObj.text}</p>
-      <p><em>Category: ${quoteObj.category}</em></p>
-    `;
+    display.textContent = `${q.text} — (${q.category})`;
   }
   
-  // REQUIRED: addQuote function must be GLOBAL
+  // REQUIRED FUNCTION 2
   function addQuote() {
-    const text = document.getElementById("newQuoteText").value.trim();
-    const category = document.getElementById("newQuoteCategory").value.trim();
+    const textInput = document.getElementById("newQuoteText");
+    const categoryInput = document.getElementById("newQuoteCategory");
   
-    if (text === "" || category === "") return;
+    const newText = textInput.value.trim();
+    const newCategory = categoryInput.value.trim();
   
-    // Add to array
-    quotes.push({ text: text, category: category });
+    if (newText === "" || newCategory === "") {
+      return;
+    }
   
-    // Update DOM immediately
+    // REQUIRED: logic to add a new quote to array
+    quotes.push({
+      text: newText,
+      category: newCategory
+    });
+  
+    // REQUIRED: update DOM immediately
     const display = document.getElementById("quoteDisplay");
-    display.innerHTML = `
-      <p>${text}</p>
-      <p><em>Category: ${category}</em></p>
-    `;
+    display.textContent = `${newText} — (${newCategory})`;
   
-    // Clear inputs
-    document.getElementById("newQuoteText").value = "";
-    document.getElementById("newQuoteCategory").value = "";
+    // Clear fields
+    textInput.value = "";
+    categoryInput.value = "";
   }
   
-  // REQUIRED: event listener for Show New Quote button
+  // REQUIRED EVENT LISTENER 1
   document.getElementById("newQuote").addEventListener("click", showRandomQuote);
   
-  // REQUIRED: event listener for Add Quote button
+  // REQUIRED EVENT LISTENER 2
   document.getElementById("addQuote").addEventListener("click", addQuote);
   
-  // show default quote on load
+  // Initial load
   showRandomQuote();
   
